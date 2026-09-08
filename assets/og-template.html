@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;background:radial-gradient(circle at 15% 15%,#164067 0%,#0f2d4e 45%,#0a1f38 100%);
+    font-family:'Inter',sans-serif;position:relative;overflow:hidden}
+
+  /* Left: text column, kept inside the 150-1050 mobile-crop-safe zone */
+  .textcol{position:absolute;left:150px;top:0;width:470px;height:630px;display:flex;flex-direction:column;justify-content:center}
+  .badge{display:inline-flex;align-items:center;gap:12px;margin-bottom:24px}
+  .badge .sq{width:46px;height:46px;border-radius:12px;background:#fff;color:#0f2d4e;font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none}
+  .badge span{color:#cfe0ee;font-size:16px;font-weight:700;letter-spacing:.03em;line-height:1.25}
+  h1{font-family:'Poppins',sans-serif;font-weight:800;font-size:46px;color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-.01em}
+  h1 em{color:#e6c887;font-style:normal}
+  p.sub{font-size:21px;color:#cfe0ee;font-weight:600;margin-bottom:24px}
+  .pills{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .pill{background:rgba(255,255,255,.12);border:2px solid rgba(230,200,135,.6);color:#fff;
+    font-weight:700;font-size:19px;padding:9px 20px;border-radius:100px;display:flex;align-items:center;gap:8px}
+
+  /* Right: photo card, right edge held at x:1050 (safe-zone boundary) */
+  .photocard{
+    position:absolute;left:650px;top:145px;width:400px;height:340px;
+    background:#fff;border-radius:20px;padding:10px;box-shadow:0 30px 70px -20px rgba(0,0,0,.55);
+  }
+  .photocard img{width:100%;height:100%;object-fit:cover;border-radius:13px;display:block}
+  .ratebadge{
+    position:absolute;left:610px;top:435px;background:#fff;border-radius:14px;
+    padding:12px 18px;box-shadow:0 14px 30px -10px rgba(0,0,0,.4);
+    display:flex;align-items:center;gap:10px;
+  }
+  .ratebadge .stars{color:#c99a3c;font-size:18px;letter-spacing:1px}
+  .ratebadge strong{font-family:'Poppins',sans-serif;color:#0f2d4e;font-size:17px}
+  .ratebadge span{color:#6a7c8c;font-size:13px;display:block}
+
+  .corner{position:absolute;bottom:22px;right:60px;color:#4a6f8f;font-size:18px;font-weight:600}
+</style></head>
+<body>
+  <div class="textcol">
+    <div class="badge"><div class="sq">S</div><span>SMILE IMPLANT &amp;<br>DENTAL CLINIC</span></div>
+    <h1>Painless Dental<br><em>Implants</em> in Delhi</h1>
+    <p class="sub">Dr. Shilpa Yadav &middot; Aya Nagar</p>
+    <div class="pills">
+      <div class="pill">&#11088; 4.9 Rating</div>
+      <div class="pill">467+ Reviews</div>
+    </div>
+  </div>
+
+  <div class="photocard">
+    <img src="og-dr-photo-source.jpg" alt="Dr. Shilpa Yadav">
+  </div>
+  <div class="ratebadge">
+    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    <div><strong>4.9</strong><span>467+ reviews</span></div>
+  </div>
+
+  <div class="corner">drshilpayadav.zeradental.in</div>
+</body></html>
