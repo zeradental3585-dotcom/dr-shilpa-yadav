@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@600;700&display=swap');
   *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1200px;height:630px;background:radial-gradient(circle at 15% 15%,#164067 0%,#0f2d4e 45%,#0a1f38 100%);
+  body{width:1200px;height:630px;background:radial-gradient(circle at 12% 10%,#1a4770 0%,#0f2d4e 45%,#081729 100%);
     font-family:'Inter',sans-serif;position:relative;overflow:hidden}
 
-  /* Left: text column, kept inside the 150-1050 mobile-crop-safe zone */
-  .textcol{position:absolute;left:150px;top:0;width:470px;height:630px;display:flex;flex-direction:column;justify-content:center}
-  .badge{display:inline-flex;align-items:center;gap:12px;margin-bottom:24px}
-  .badge .sq{width:46px;height:46px;border-radius:12px;background:#fff;color:#0f2d4e;font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none}
-  .badge span{color:#cfe0ee;font-size:16px;font-weight:700;letter-spacing:.03em;line-height:1.25}
-  h1{font-family:'Poppins',sans-serif;font-weight:800;font-size:46px;color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-.01em}
-  h1 em{color:#e6c887;font-style:normal}
-  p.sub{font-size:21px;color:#cfe0ee;font-weight:600;margin-bottom:24px}
-  .pills{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
-  .pill{background:rgba(255,255,255,.12);border:2px solid rgba(230,200,135,.6);color:#fff;
-    font-weight:700;font-size:19px;padding:9px 20px;border-radius:100px;display:flex;align-items:center;gap:8px}
+  /* Left: text column, big and bold, kept inside the mobile-crop-safe zone */
+  .textcol{position:absolute;left:150px;top:0;width:480px;height:630px;display:flex;flex-direction:column;justify-content:center}
+  .badge{display:inline-flex;align-items:center;gap:14px;margin-bottom:28px}
+  .badge .sq{width:60px;height:60px;border-radius:15px;background:#fff;color:#0f2d4e;font-family:'Poppins',sans-serif;font-weight:900;font-size:30px;display:flex;align-items:center;justify-content:center;flex:none}
+  .badge span{color:#dcebf7;font-size:21px;font-weight:700;letter-spacing:.02em;line-height:1.25}
+  h1{font-family:'Poppins',sans-serif;font-weight:900;font-size:80px;color:#fff;line-height:.98;margin-bottom:22px;letter-spacing:-.01em}
+  h1 em{color:#f0cd7e;font-style:normal;display:block}
+  p.sub{font-size:27px;color:#dcebf7;font-weight:700;margin-bottom:30px}
+  .pills{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .pill{background:rgba(255,255,255,.14);border:2.5px solid rgba(240,205,126,.7);color:#fff;
+    font-weight:700;font-size:25px;padding:11px 26px;border-radius:100px;display:flex;align-items:center;gap:10px}
 
-  /* Right: photo card, right edge held at x:1050 (safe-zone boundary) */
+  /* Right: big zoomed photo panel, filling most of the canvas height */
   .photocard{
-    position:absolute;left:650px;top:145px;width:400px;height:340px;
-    background:#fff;border-radius:20px;padding:10px;box-shadow:0 30px 70px -20px rgba(0,0,0,.55);
+    position:absolute;left:648px;top:22px;width:480px;height:586px;
+    background:#fff;border-radius:26px;padding:12px;box-shadow:0 34px 80px -18px rgba(0,0,0,.6);
   }
-  .photocard img{width:100%;height:100%;object-fit:cover;border-radius:13px;display:block}
+  .photocard img{width:100%;height:100%;object-fit:cover;object-position:center 22%;border-radius:17px;display:block}
   .ratebadge{
-    position:absolute;left:610px;top:435px;background:#fff;border-radius:14px;
-    padding:12px 18px;box-shadow:0 14px 30px -10px rgba(0,0,0,.4);
-    display:flex;align-items:center;gap:10px;
+    position:absolute;left:598px;top:472px;background:#fff;border-radius:16px;
+    padding:15px 22px;box-shadow:0 16px 34px -10px rgba(0,0,0,.45);
+    display:flex;align-items:center;gap:12px;
   }
-  .ratebadge .stars{color:#c99a3c;font-size:18px;letter-spacing:1px}
-  .ratebadge strong{font-family:'Poppins',sans-serif;color:#0f2d4e;font-size:17px}
-  .ratebadge span{color:#6a7c8c;font-size:13px;display:block}
+  .ratebadge .stars{color:#c99a3c;font-size:20px;letter-spacing:1px}
+  .ratebadge strong{font-family:'Poppins',sans-serif;color:#0f2d4e;font-size:20px}
+  .ratebadge span{color:#6a7c8c;font-size:14px;display:block}
 
-  .corner{position:absolute;bottom:22px;right:60px;color:#4a6f8f;font-size:18px;font-weight:600}
+  .corner{position:absolute;bottom:18px;right:34px;color:#5c81a3;font-size:18px;font-weight:700}
 </style></head>
 <body>
   <div class="textcol">
     <div class="badge"><div class="sq">S</div><span>SMILE IMPLANT &amp;<br>DENTAL CLINIC</span></div>
-    <h1>Painless Dental<br><em>Implants</em> in Delhi</h1>
-    <p class="sub">Dr. Shilpa Yadav &middot; Aya Nagar</p>
+    <h1>Painless<br>Dental<br><em>Implants</em></h1>
+    <p class="sub">Dr. Shilpa Yadav &middot; Aya Nagar, Delhi</p>
     <div class="pills">
       <div class="pill">&#11088; 4.9 Rating</div>
       <div class="pill">467+ Reviews</div>
