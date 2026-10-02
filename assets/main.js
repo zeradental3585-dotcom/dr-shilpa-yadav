@@ -3,7 +3,7 @@
   var WA_NUMBER = "918448668209";
 
   function waLink(pageLabel){
-    var text = "Hello Dr. Shilpa, I would like to schedule a free implant consultation at your Aya Nagar clinic. (via " + pageLabel + ")";
+    var text = "Hello Dr. Shilpa, I would like to book an implant suitability consultation at your Aya Nagar clinic. (via " + pageLabel + ")";
     return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text);
   }
 
@@ -41,7 +41,7 @@
         var name = (form.querySelector("#f-name") || {}).value || "";
         var phone = (form.querySelector("#f-phone") || {}).value || "";
         var concern = (form.querySelector("#f-concern") || {}).value || "";
-        var msg = "Hello Dr. Shilpa, I would like a free implant consultation.\n" +
+        var msg = "Hello Dr. Shilpa, I would like to book an implant consultation.\n" +
           "Name: " + name + "\nPhone: " + phone + "\nConcern: " + concern + "\n(via " + pageLabel + ")";
         window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg), "_blank", "noopener,noreferrer");
         var note = document.getElementById("consult-form-note");
