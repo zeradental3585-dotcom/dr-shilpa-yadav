@@ -358,19 +358,5 @@ footer a:hover{color:#fff}
   .risk-grid>*,.review-grid>*{flex:0 0 82%;scroll-snap-align:center}
 }
 
-/* ---------- Mobile sticky dual CTA bar ---------- */
-.mobile-cta-bar{display:none}
-@media (max-width:640px){
-  .float-whatsapp{display:none}
-  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-  .mobile-cta-bar{
-    display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:10px;
-    background:rgba(255,255,255,.98);backdrop-filter:blur(10px);
-    border-top:1px solid var(--line);box-shadow:0 -10px 28px -16px rgba(15,45,78,.3);
-    padding:10px max(16px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-right));
-  }
-  .mobile-cta-bar .btn{flex:1;min-height:48px;padding:12px 10px;font-size:.95rem}
-}
-
 /* ---------- Animated count-up numbers ---------- */
 [data-count-to]{font-variant-numeric:tabular-nums}
