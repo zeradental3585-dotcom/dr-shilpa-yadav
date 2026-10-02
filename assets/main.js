@@ -92,6 +92,29 @@
       onHeaderScroll();
     }
 
+    // Mobile nav drawer (hamburger) toggle
+    var navToggle = document.querySelector(".nav-toggle");
+    var navDrawer = document.querySelector(".nav-drawer");
+    var navBackdrop = document.querySelector(".nav-drawer-backdrop");
+    var navClose = document.querySelector(".nav-drawer-close");
+    if (navToggle && navDrawer){
+      var openNav = function(){
+        document.body.classList.add("nav-open");
+        navToggle.setAttribute("aria-expanded", "true");
+      };
+      var closeNav = function(){
+        document.body.classList.remove("nav-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      };
+      navToggle.addEventListener("click", function(){
+        if (document.body.classList.contains("nav-open")) closeNav(); else openNav();
+      });
+      if (navClose){ navClose.addEventListener("click", closeNav); }
+      if (navBackdrop){ navBackdrop.addEventListener("click", closeNav); }
+      navDrawer.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeNav); });
+      document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeNav(); });
+    }
+
     // Keep the floating WhatsApp button from covering hero text/CTAs on short mobile
     // viewports (Chrome's address bar + nav bar can shrink the visible viewport enough
     // that the fixed bottom-right button overlaps the hero paragraph before any scroll).
