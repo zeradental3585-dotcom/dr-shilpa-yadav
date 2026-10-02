@@ -301,7 +301,9 @@ table.compare thead .col-implant{background:var(--teal-deep)}
   z-index:60;background:#25D366;color:#fff;
   width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   box-shadow:0 10px 26px -6px rgba(37,211,102,.6);animation:pulse 2.4s infinite;
+  transition:opacity .25s ease,transform .25s ease;
 }
+.float-whatsapp.wa-hide{opacity:0;transform:scale(.6);pointer-events:none}
 .float-whatsapp svg{width:30px;height:30px}
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}

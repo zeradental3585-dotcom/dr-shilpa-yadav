@@ -92,6 +92,29 @@
       onHeaderScroll();
     }
 
+    // Keep the floating WhatsApp button from covering hero text/CTAs on short mobile
+    // viewports (Chrome's address bar + nav bar can shrink the visible viewport enough
+    // that the fixed bottom-right button overlaps the hero paragraph before any scroll).
+    // Fades the button out while its position would still sit over the hero/trust-row
+    // zone, and back in once that zone has scrolled clear -- uses live measurements
+    // rather than a fixed pixel guess, so it adapts to any viewport height or content change.
+    var floatWa = document.querySelector(".float-whatsapp");
+    var heroSafeZone = document.querySelector(".trust-row") || document.querySelector(".hero-ctas");
+    if (floatWa && heroSafeZone){
+      var updateFloatWaVisibility = function(){
+        var safeBottom = heroSafeZone.getBoundingClientRect().bottom + window.scrollY;
+        var buttonTopDoc = window.scrollY + window.innerHeight - 76;
+        if (buttonTopDoc < safeBottom + 16){
+          floatWa.classList.add("wa-hide");
+        } else {
+          floatWa.classList.remove("wa-hide");
+        }
+      };
+      window.addEventListener("scroll", updateFloatWaVisibility, {passive:true});
+      window.addEventListener("resize", updateFloatWaVisibility);
+      updateFloatWaVisibility();
+    }
+
     // Consultation form -> WhatsApp handoff (no backend yet; see deploy notes)
     var form = document.getElementById("consult-form");
     if (form){
