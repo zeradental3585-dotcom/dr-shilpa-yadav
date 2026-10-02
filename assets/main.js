@@ -1,7 +1,7 @@
 // Smile Implant and Dental Clinic — Dr. Shilpa Yadav — shared site script
 (function(){
   var WA_NUMBER = "918448668209";
-  var LEAD_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz_PLACEHOLDER/exec";
+  var LEAD_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw3OEJlRvmYIhMfwRMtaU05jCGQO_vH-GRBhc3wbauSAsndBVde8gRfHOgRJN2J5uja/exec";
 
   function waLink(pageLabel){
     var text = "Hello Dr. Shilpa, I would like to book an implant suitability consultation at your Aya Nagar clinic. (via " + pageLabel + ")";
