@@ -436,6 +436,15 @@ table.compare thead .col-implant{background:var(--teal-deep)}
 .location-card ul{margin:16px 0 0;padding-left:20px;color:var(--ink-soft)}
 .location-card li{margin-bottom:8px}
 #consult-form .btn{width:100%}
+.trust-mini{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
+.trust-mini span{
+  display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line);
+  border-radius:100px;padding:7px 14px;font-size:.82rem;color:var(--ink-soft);font-weight:500;
+}
+.trust-mini strong{color:var(--navy)}
+.form-hint{margin:0 0 2px;font-size:.85rem;color:var(--ink-soft)}
+.form-alt{margin:4px 0 0;font-size:.85rem;color:var(--ink-soft);text-align:center}
+.form-alt a{color:var(--teal-deep);font-weight:600}
 .map-embed{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:320px}
 .map-embed iframe{width:100%;height:100%;min-height:320px;border:0}
 
