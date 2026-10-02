@@ -481,6 +481,8 @@ footer a:hover{color:#fff}
   flex-wrap:wrap;gap:10px;font-size:.8rem;color:#7f93a6;
 }
 .footer-bottom a{color:#a9c1d4;font-weight:600}
+.dentist-login-link{opacity:.55;font-weight:500!important;transition:opacity .2s ease}
+.dentist-login-link:hover{opacity:1}
 
 /* Position-only reveal (never opacity) so content stays fully present and readable
    for a crawler that doesn't scroll/wait on JS -- SEO-first-site rule learned on the
