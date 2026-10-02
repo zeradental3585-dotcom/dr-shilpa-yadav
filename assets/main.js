@@ -48,6 +48,50 @@
       revealEls.forEach(function(el){ el.classList.add("in"); });
     }
 
+    // Animated count-up for trust-signal numbers (e.g. 4.9 rating, 13+ years)
+    var countEls = document.querySelectorAll("[data-count-to]");
+    if (countEls.length){
+      var animateCount = function(el){
+        var to = parseFloat(el.getAttribute("data-count-to"));
+        var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+        if (isNaN(to)) return;
+        var dur = 1100, start = null;
+        function step(ts){
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (to * eased).toFixed(decimals);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = to.toFixed(decimals);
+        }
+        requestAnimationFrame(step);
+      };
+      if ("IntersectionObserver" in window){
+        var countIO = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (entry.isIntersecting){
+              countIO.unobserve(entry.target);
+              animateCount(entry.target);
+            }
+          });
+        }, {threshold:.5});
+        countEls.forEach(function(el){ countIO.observe(el); });
+      } else {
+        countEls.forEach(animateCount);
+      }
+    }
+
+    // Header scroll shadow
+    var header = document.querySelector(".site-header");
+    if (header){
+      var onHeaderScroll = function(){
+        if (window.scrollY > 8) header.classList.add("scrolled");
+        else header.classList.remove("scrolled");
+      };
+      window.addEventListener("scroll", onHeaderScroll, {passive:true});
+      onHeaderScroll();
+    }
+
     // Consultation form -> WhatsApp handoff (no backend yet; see deploy notes)
     var form = document.getElementById("consult-form");
     if (form){
