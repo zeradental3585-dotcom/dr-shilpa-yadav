@@ -318,6 +318,11 @@ table.compare .col-implant{background:rgba(12,110,130,.06)}
 table.compare thead .col-implant{background:var(--teal-deep)}
 .compare-hint{display:none}
 
+/* Inline gold text-link, used to point from a short on-page summary (e.g. the
+   homepage comparison snippet) to its full standalone guide page. */
+.guide-link{display:inline-flex;align-items:center;gap:6px;margin-top:4px;font-weight:700;color:var(--gold-deep);text-decoration:none;border-bottom:1.5px solid var(--gold-light)}
+.guide-link:hover{color:var(--teal-deep);border-bottom-color:var(--teal-deep)}
+
 /* Yes/No answer icons -- a small brand-colored check/cross dot in place of the
    plain ✅/❌ emoji. Defined outside the media query so both the desktop table
    and the mobile cards below get the same polished treatment. */
