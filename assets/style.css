@@ -277,9 +277,76 @@ body.nav-open{overflow:hidden}
 .nav-drawer-actions .btn{width:100%}
 
 /* ---------- Hero ---------- */
+/* Organic gradient-mesh background system -- replaces the single flat navy gradient every
+   page used to share (the "looks like a template" complaint). Each page carries one of six
+   .hero--xxx modifier classes alongside .hero; the modifier overrides the canvas gradient and
+   a set of custom properties that drive the blob mesh in .hero::before below, so the actual
+   mesh-generation CSS is written once but produces a genuinely different flowing arrangement
+   of color pools (not just a recolored copy) on every variant. The ring/dot ::after layer and
+   the .hero-grid sparkle layer stay constant across all variants as the unifying brand thread.
+   Default values on .hero itself are the fallback/safety net if a page is ever missing its
+   modifier class. */
 .hero{
+  --b1:184,144,60;   --b1pos:10% 88%;  --b1size:400px;  --b1a:.35;
+  --b2:12,110,130;   --b2pos:95% 95%;  --b2size:340px;  --b2a:.29;
+  --b3:15,45,78;     --b3pos:50% 50%;  --b3size:1px;    --b3a:0;
+  --b4:232,202,140;  --b4pos:50% 50%;  --b4size:1px;    --b4a:0;
   background:radial-gradient(circle at 15% 20%,#123a63 0%,var(--navy) 45%,var(--navy-deep) 100%);
   color:#fff;position:relative;overflow:hidden;
+}
+/* Home -- signature "Aurora": the richest mesh on the site, four color pools in motion
+   (gold, teal, a muted rose-coral touch, and gold-light), used nowhere else. */
+.hero--aurora{
+  background:radial-gradient(circle at 18% 18%,#163f6c 0%,var(--navy) 42%,var(--navy-deep) 100%);
+  --b1:184,144,60;   --b1pos:8% 86%;   --b1size:430px;  --b1a:.38;
+  --b2:12,110,130;   --b2pos:94% 92%;  --b2size:360px;  --b2a:.32;
+  --b3:196,110,96;   --b3pos:88% 12%;  --b3size:340px;  --b3a:.26;
+  --b4:232,202,140;  --b4pos:14% 8%;   --b4size:270px;  --b4a:.26;
+}
+/* Service Areas hub + a locality rotation -- "Harbor Teal": cooler, wider, expansive pools
+   reading as a map/territory rather than a single spotlight. */
+.hero--teal{
+  background:radial-gradient(circle at 82% 18%,#114a5e 0%,var(--navy) 45%,var(--navy-deep) 100%);
+  --b1:9,89,105;     --b1pos:90% 85%;  --b1size:470px;  --b1a:.42;
+  --b2:46,150,168;   --b2pos:6% 90%;   --b2size:340px;  --b2a:.29;
+  --b3:184,144,60;   --b3pos:92% 10%;  --b3size:290px;  --b3a:.22;
+  --b4:12,110,130;   --b4pos:30% 30%;  --b4size:380px;  --b4a:.16;
+}
+/* About + Contact + a locality rotation -- "Amber Warmth": grounded, welcoming, gold/amber
+   pools low in the frame instead of a cool spotlight. */
+.hero--amber{
+  background:radial-gradient(circle at 20% 85%,#2a1f10 0%,var(--navy) 48%,var(--navy-deep) 100%);
+  --b1:201,138,74;   --b1pos:14% 92%;  --b1size:470px;  --b1a:.42;
+  --b2:184,144,60;   --b2pos:90% 15%;  --b2size:340px;  --b2a:.32;
+  --b3:232,202,140;  --b3pos:60% 80%;  --b3size:270px;  --b3a:.24;
+  --b4:12,110,130;   --b4pos:95% 90%;  --b4size:245px;  --b4a:.13;
+}
+/* FAQ + Cost + a locality rotation -- "Midnight Clarity": deep and uncluttered, fewer/smaller
+   pools, lower opacity -- the calm, confident, informational read. */
+.hero--midnight{
+  background:radial-gradient(circle at 50% 8%,#102845 0%,var(--navy) 50%,#060f1d 100%);
+  --b1:15,45,78;     --b1pos:85% 90%;  --b1size:320px;  --b1a:.29;
+  --b2:184,144,60;   --b2pos:12% 85%;  --b2size:240px;  --b2a:.18;
+  --b3:12,110,130;   --b3pos:90% 12%;  --b3size:240px;  --b3a:.13;
+  --b4:232,202,140;  --b4pos:50% 50%;  --b4size:1px;    --b4a:0;
+}
+/* Compare + Process + a locality rotation -- "Dual Current": two balanced pools facing off
+   left/right with a thin gold seam between them, reading as "two sides" / "step by step". */
+.hero--dual{
+  background:radial-gradient(circle at 12% 50%,#123a63 0%,var(--navy) 55%,var(--navy-deep) 100%);
+  --b1:15,45,78;     --b1pos:8% 40%;   --b1size:430px;  --b1a:.42;
+  --b2:12,110,130;   --b2pos:94% 60%;  --b2size:430px;  --b2a:.38;
+  --b3:184,144,60;   --b3pos:50% 96%;  --b3size:290px;  --b3a:.26;
+  --b4:46,150,168;   --b4pos:94% 10%;  --b4size:225px;  --b4a:.16;
+}
+/* Reviews + Why-Implants + a locality rotation -- "Rose-Gold Glow": a celebratory upper-right
+   spotlight (rose + gold) for trust/testimonial and emotional-urgency pages. */
+.hero--rose{
+  background:radial-gradient(circle at 85% 12%,#3a2234 0%,var(--navy) 46%,var(--navy-deep) 100%);
+  --b1:196,110,96;   --b1pos:90% 10%;  --b1size:470px;  --b1a:.42;
+  --b2:184,144,60;   --b2pos:10% 88%;  --b2size:340px;  --b2a:.32;
+  --b3:232,202,140;  --b3pos:70% 30%;  --b3size:270px;  --b3a:.22;
+  --b4:12,110,130;   --b4pos:15% 15%;  --b4size:245px;  --b4a:.13;
 }
 .hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -293,14 +360,16 @@ body.nav-open{overflow:hidden}
 .hero::before{
   content:"";position:absolute;inset:-15% -10%;z-index:0;pointer-events:none;
   background:
-    radial-gradient(360px circle at 10% 88%,rgba(184,144,60,.22),transparent 60%),
-    radial-gradient(300px circle at 95% 95%,rgba(12,110,130,.18),transparent 60%);
-  filter:blur(6px);
-  animation:heroBlobDrift 18s ease-in-out infinite alternate;
+    radial-gradient(var(--b1size) circle at var(--b1pos),rgba(var(--b1),var(--b1a)),transparent 62%),
+    radial-gradient(var(--b2size) circle at var(--b2pos),rgba(var(--b2),var(--b2a)),transparent 60%),
+    radial-gradient(var(--b3size) circle at var(--b3pos),rgba(var(--b3),var(--b3a)),transparent 65%),
+    radial-gradient(var(--b4size) circle at var(--b4pos),rgba(var(--b4),var(--b4a)),transparent 58%);
+  filter:blur(6px) saturate(1.15);
+  animation:heroBlobDrift 22s ease-in-out infinite alternate;
 }
 @keyframes heroBlobDrift{
   0%{transform:translate(0,0) scale(1)}
-  50%{transform:translate(3%,-4%) scale(1.07)}
+  50%{transform:translate(3%,-4%) scale(1.06)}
   100%{transform:translate(-2%,3%) scale(1.02)}
 }
 /* Slow-twinkling gold sparkle field -- a second decorative layer, on .hero-grid rather than
