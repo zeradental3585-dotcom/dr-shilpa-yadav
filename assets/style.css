@@ -319,23 +319,27 @@ table.compare thead .col-implant{background:var(--teal-deep)}
 .compare-hint{display:none}
 
 /* Mobile: a 640px-wide table forced into a ~340px column meant seeing only
-   one-and-a-bit columns at a time and swiping to compare -- replace the
-   scrolling table with a stack of per-criterion cards instead, each listing
-   all three treatments at a glance (data-label attrs on the <td>s supply the
-   per-cell headings). No horizontal scroll needed, so the old swipe hint and
-   scroll-fade are retired with it. */
+   one-and-a-bit columns at a time while swiping the whole table sideways --
+   each criterion row is now its own swipeable card instead (data-label attrs
+   on the <td>s supply the per-cell headings), one card at a time, same
+   swipe-carousel pattern as the risk cards / reviews / photo gallery
+   elsewhere on this page. */
 @media (max-width:680px){
   .compare-wrap{overflow-x:visible;box-shadow:none;border-radius:0;margin-top:26px}
   table.compare{display:block;min-width:0;width:100%}
   table.compare thead{display:none}
-  table.compare tbody{display:block}
-  table.compare tr{display:block;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
-  table.compare tr:last-child{margin-bottom:0}
+  table.compare tbody{
+    display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    gap:16px;margin:8px -24px 0;padding:6px 24px 16px;scrollbar-width:none;
+  }
+  table.compare tbody::-webkit-scrollbar{display:none}
+  table.compare tr{display:block;flex:0 0 82%;scroll-snap-align:center;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
   table.compare th:first-child{display:block;position:static;background:var(--navy);color:#fff;font-family:'Poppins',sans-serif;font-size:1rem;padding:13px 16px;text-align:left}
   table.compare td{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);text-align:right;font-weight:500}
   table.compare td:last-child{border-bottom:none}
   table.compare td::before{content:attr(data-label);flex:0 0 auto;font-size:.74rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft)}
   table.compare td.col-implant::before{color:var(--teal-deep)}
+  .compare-hint{display:flex;text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:10px;gap:6px;align-items:center;justify-content:center}
 }
 
 /* ---------- Authority ---------- */
@@ -544,19 +548,14 @@ footer a:hover{color:#fff}
 .reveal{transform:translateY(22px) scale(.98);transition:transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.in{transform:none}
 
-/* ---------- Mobile swipeable carousel (reviews only) ---------- */
-/* risk-grid used to share this swipe-carousel treatment too, but on a phone
-   that meant each "why it matters" card was cropped to ~82% width with the
-   next one peeking in at the edge -- all 3 points are short, safety-relevant
-   facts a visitor should see without having to swipe, so below 820px it's a
-   plain full-width vertical stack instead (see .risk-grid rule above). */
+/* ---------- Mobile swipeable carousels (risk cards, reviews, photos) ---------- */
 @media (max-width:720px){
-  .review-grid,.photo-grid{
+  .risk-grid,.review-grid,.photo-grid{
     display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     gap:16px;margin:8px -24px 0;padding:6px 24px 16px;scrollbar-width:none;
   }
-  .review-grid::-webkit-scrollbar,.photo-grid::-webkit-scrollbar{display:none}
-  .review-grid>*,.photo-grid>*{flex:0 0 82%;scroll-snap-align:center}
+  .risk-grid::-webkit-scrollbar,.review-grid::-webkit-scrollbar,.photo-grid::-webkit-scrollbar{display:none}
+  .risk-grid>*,.review-grid>*,.photo-grid>*{flex:0 0 82%;scroll-snap-align:center}
 }
 
 /* ---------- Animated count-up numbers ---------- */
