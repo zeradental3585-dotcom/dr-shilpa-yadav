@@ -138,7 +138,11 @@
       updateFloatWaVisibility();
     }
 
-    // Consultation form -> WhatsApp handoff (no backend yet; see deploy notes)
+    // Consultation form -> WhatsApp handoff + Google Sheets lead logging.
+    // IMPORTANT: this used to be two separate "submit" listeners. The first one
+    // called form.reset() before the second one read the field values, so the
+    // Sheet always received name/phone/concern as empty strings. Fixed by
+    // reading the values ONCE, up front, and resetting the form last.
     var form = document.getElementById("consult-form");
     if (form){
       form.addEventListener("submit", function(e){
@@ -146,9 +150,14 @@
         var name = (form.querySelector("#f-name") || {}).value || "";
         var phone = (form.querySelector("#f-phone") || {}).value || "";
         var concern = (form.querySelector("#f-concern") || {}).value || "";
+
+        if (typeof gtag === "function"){ gtag("event", "consult_form_submit", {page: pageLabel}); }
+        logLead({type: "Contact Form", page: pageLabel, name: name, phone: phone, concern: concern, cta: "consult-form"});
+
         var msg = "Hello Dr. Shilpa, I would like to book an implant consultation.\n" +
           "Name: " + name + "\nPhone: " + phone + "\nConcern: " + concern + "\n(via " + pageLabel + ")";
         window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg), "_blank", "noopener,noreferrer");
+
         var note = document.getElementById("consult-form-note");
         if (note){ note.hidden = false; }
         form.reset();
@@ -170,14 +179,5 @@
         logLead({type: "Call Click", page: pageLabel, cta: label});
       });
     });
-    if (form){
-      form.addEventListener("submit", function(){
-        if (typeof gtag === "function"){ gtag("event", "consult_form_submit", {page: pageLabel}); }
-        var name = (form.querySelector("#f-name") || {}).value || "";
-        var phone = (form.querySelector("#f-phone") || {}).value || "";
-        var concern = (form.querySelector("#f-concern") || {}).value || "";
-        logLead({type: "Contact Form", page: pageLabel, name: name, phone: phone, concern: concern, cta: "consult-form"});
-      });
-    }
   });
 })();
