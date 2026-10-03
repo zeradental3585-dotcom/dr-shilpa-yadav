@@ -314,13 +314,26 @@ table.compare thead th:first-child{background:var(--navy)}
 table.compare tbody tr:last-child td{border-bottom:none}
 table.compare .col-implant{background:rgba(12,110,130,.06)}
 table.compare thead .col-implant{background:var(--teal-deep)}
-.compare-hint{display:none;text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:10px;gap:6px;align-items:center;justify-content:center}
+.compare-hint{display:none}
+
+/* Mobile: a 640px-wide table forced into a ~340px column meant seeing only
+   one-and-a-bit columns at a time and swiping to compare -- replace the
+   scrolling table with a stack of per-criterion cards instead, each listing
+   all three treatments at a glance (data-label attrs on the <td>s supply the
+   per-cell headings). No horizontal scroll needed, so the old swipe hint and
+   scroll-fade are retired with it. */
 @media (max-width:680px){
-  .compare-hint{display:flex}
-  .compare-wrap::after{
-    content:"";position:absolute;top:0;right:0;bottom:0;width:28px;pointer-events:none;
-    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.9));
-  }
+  .compare-wrap{overflow-x:visible;box-shadow:none;border-radius:0;margin-top:26px}
+  table.compare{display:block;min-width:0;width:100%}
+  table.compare thead{display:none}
+  table.compare tbody{display:block}
+  table.compare tr{display:block;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
+  table.compare tr:last-child{margin-bottom:0}
+  table.compare th:first-child{display:block;position:static;background:var(--navy);color:#fff;font-family:'Poppins',sans-serif;font-size:1rem;padding:13px 16px;text-align:left}
+  table.compare td{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);text-align:right;font-weight:500}
+  table.compare td:last-child{border-bottom:none}
+  table.compare td::before{content:attr(data-label);flex:0 0 auto;font-size:.74rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft)}
+  table.compare td.col-implant::before{color:var(--teal-deep)}
 }
 
 /* ---------- Authority ---------- */
