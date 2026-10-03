@@ -303,6 +303,22 @@ body.nav-open{overflow:hidden}
   50%{transform:translate(3%,-4%) scale(1.07)}
   100%{transform:translate(-2%,3%) scale(1.02)}
 }
+/* Slow-twinkling gold sparkle field -- a second decorative layer, on .hero-grid rather than
+   .hero (which already has its own ::before/::after for the blob+ring above). Desktop-only
+   and kept fully inside the hero's own bounds (no negative inset), so it can never be the
+   cause of the horizontal-scroll regression that was previously fixed on mobile. */
+@media (min-width:921px){
+  .hero-grid::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 500'%3E%3Ccircle cx='60' cy='80' r='2' fill='rgba(232,202,140,0.55)'/%3E%3Ccircle cx='170' cy='36' r='1.4' fill='rgba(255,255,255,0.4)'/%3E%3Ccircle cx='520' cy='64' r='1.8' fill='rgba(232,202,140,0.5)'/%3E%3Ccircle cx='40' cy='310' r='1.6' fill='rgba(255,255,255,0.35)'/%3E%3Ccircle cx='545' cy='370' r='2.2' fill='rgba(232,202,140,0.45)'/%3E%3Ccircle cx='300' cy='18' r='1.4' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-size:100% 100%;
+    animation:sparkleTwinkle 5s ease-in-out infinite alternate;
+  }
+}
+@keyframes sparkleTwinkle{0%{opacity:.45}100%{opacity:1}}
+@media (min-width:921px) and (prefers-reduced-motion:reduce){
+  .hero-grid::before{animation:none;opacity:.7}
+}
 .hero-grid{
   display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
   padding-top:64px;padding-bottom:60px;position:relative;z-index:1;
@@ -327,43 +343,103 @@ body.nav-open{overflow:hidden}
   .hero-grid>div:first-child>*,.hero-card{animation:none}
 }
 .hero h1{color:#fff;font-size:clamp(2.3rem,7.5vw,3.1rem);letter-spacing:-.01em;font-weight:600}
-.hero h1 em{color:var(--gold-light);font-style:italic;font-weight:500}
+.hero h1 em{color:var(--gold-light);font-style:italic;font-weight:500;text-shadow:0 0 28px rgba(232,202,140,.45)}
 .hero p.lede{color:#cfe0ee;font-size:1.15rem;max-width:52ch}
+/* Hero-scoped eyebrow upgrade: a fading gold rule + a small glowing medallion dot, replacing
+   the plain currentColor line -- scoped to .hero only, so the same .eyebrow used as a plain
+   dark-on-light section label everywhere else on the site is completely untouched. */
+.hero .eyebrow{color:#fff;gap:12px}
+.hero .eyebrow::before{width:34px;height:2px;background:linear-gradient(90deg,var(--gold-light),transparent)}
+.hero .eyebrow::after{
+  content:"";display:inline-block;width:5px;height:5px;border-radius:50%;flex:none;
+  background:var(--gold-light);box-shadow:0 0 8px 1px rgba(232,202,140,.7);margin-left:-6px;
+}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin:28px 0}
 @media (max-width:560px){
   .hero-ctas{flex-direction:column}
   .hero-ctas .btn{width:100%;padding-top:17px;padding-bottom:17px;font-size:1.05rem}
 }
+/* A soft "live" pulse ring on the hero's WhatsApp CTA only (never the floating WhatsApp
+   button or the header one elsewhere) -- draws the eye without being a gimmick, and turns
+   off entirely for anyone who asked their OS for reduced motion. */
+.hero-ctas .btn-whatsapp{position:relative}
+.hero-ctas .btn-whatsapp::before{
+  content:"";position:absolute;inset:-4px;border-radius:100px;border:1.5px solid rgba(37,211,102,.55);
+  animation:ctaPulseRing 2.4s ease-out infinite;pointer-events:none;
+}
+@keyframes ctaPulseRing{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
+@media (prefers-reduced-motion:reduce){.hero-ctas .btn-whatsapp::before{animation:none;display:none}}
 .trust-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
 .trust-item{
   display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));
+  border:1px solid rgba(232,202,140,.3);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border-radius:100px;padding:10px 20px 10px 16px;
+  box-shadow:0 8px 20px -12px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12);
+  transition:transform .25s ease,border-color .25s ease;
 }
+.trust-item:hover{transform:translateY(-2px);border-color:rgba(232,202,140,.55)}
 .trust-item .stars{color:var(--gold-light);font-size:1.05rem;letter-spacing:1px}
 .trust-item strong{display:block;color:#fff;font-size:1rem}
 .trust-item span{color:#9fb6cb;font-size:.82rem}
+
+/* ---------- Hero photo: gold-framed showcase ----------
+   A mat-and-frame treatment (gold gradient border + two halo rings) replacing the previous
+   flat white card. The name/credential caption now overlays the photo itself as a frosted
+   glass plaque instead of sitting in a separate strip below it, and the rating becomes a
+   floating medallion badge popping off the frame's top-right edge -- reads as a gallery
+   portrait rather than a generic stock-photo card. Same markup on all 26 pages, so this is a
+   pure CSS change that applies site-wide with no HTML edits. */
 .hero-card{
-  background:#fff;border-radius:20px;padding:22px;box-shadow:var(--shadow-lg);color:var(--ink);
+  position:relative;isolation:isolate;
+  padding:14px;border-radius:26px;
+  background:linear-gradient(155deg,var(--gold-light) 0%,var(--gold) 55%,var(--gold-deep) 100%);
+  box-shadow:0 30px 70px -24px rgba(5,14,26,.6),0 0 0 1px rgba(232,202,140,.2);
 }
-.hero-card img{border-radius:14px;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 20%}
-.hero-card .cap{display:flex;justify-content:space-between;align-items:center;padding-top:14px}
-.hero-card .cap strong{display:block;color:var(--navy);font-family:'Poppins',sans-serif}
-.hero-card .cap span{color:var(--ink-soft);font-size:.85rem}
+@media (min-width:641px){
+  .hero-card::before{
+    content:"";position:absolute;inset:-20px;z-index:-1;border-radius:38px;
+    border:1px solid rgba(232,202,140,.4);pointer-events:none;
+  }
+  .hero-card::after{
+    content:"";position:absolute;inset:-38px;z-index:-1;border-radius:52px;
+    border:1px dashed rgba(232,202,140,.22);pointer-events:none;
+    animation:frameRingSpin 50s linear infinite;
+  }
+}
+@keyframes frameRingSpin{to{transform:rotate(360deg)}}
+@media (min-width:641px) and (prefers-reduced-motion:reduce){.hero-card::after{animation:none}}
+.hero-card img{
+  display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 20%;
+  border-radius:16px;
+}
+.hero-card .cap{
+  position:absolute;left:14px;right:14px;bottom:14px;z-index:1;
+  display:block;padding:38px 18px 16px;border-radius:0 0 16px 16px;
+  background:linear-gradient(to top,rgba(6,16,30,.92) 8%,rgba(6,16,30,.6) 52%,transparent 100%);
+}
+.hero-card .cap strong{display:block;color:#fff;font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.08rem;letter-spacing:-.005em}
+.hero-card .cap span{color:#d7e3ee;font-size:.83rem}
 .hero-card .rating-pill{
-  background:var(--paper-warm);border:1px solid var(--gold-light);border-radius:100px;
-  padding:6px 12px;font-size:.82rem;font-weight:700;color:var(--navy);display:flex;gap:6px;align-items:center;
+  position:absolute;top:-18px;right:2px;z-index:2;
+  background:var(--navy-deep);border:1.5px solid var(--gold-light);border-radius:100px;
+  padding:7px 14px;font-size:.82rem;font-weight:700;color:#fff;
+  display:flex;gap:6px;align-items:center;
+  box-shadow:0 10px 22px -8px rgba(5,14,26,.6);
 }
-/* On phones: let the hero photo bleed to the screen edges so it reads as big and prominent
-   instead of sitting inside the standard container gutter like a small inset card. */
+/* On phones: let the hero photo keep bleeding to the screen edges so it reads as big and
+   prominent instead of sitting inside the standard container gutter -- the gold frame/halo
+   rings collapse (no padding budget for them at this width), but the glass caption overlay
+   and floating badge carry the same premium feel into the full-bleed treatment. */
 @media (max-width:640px){
   .hero-card{
     margin:0 -24px;border-radius:0;box-shadow:none;padding:0;
-    border-bottom:4px solid var(--gold);
+    background:none;border-bottom:4px solid var(--gold);
   }
   .hero-card img{border-radius:0;aspect-ratio:1/1}
-  .hero-card .cap{padding:14px 20px 4px}
+  .hero-card .cap{left:0;right:0;bottom:0;padding:38px 20px 16px;border-radius:0}
+  .hero-card .rating-pill{top:auto;bottom:calc(100% - 28px);right:16px}
 }
 
 /* ---------- Empathy / education ---------- */
