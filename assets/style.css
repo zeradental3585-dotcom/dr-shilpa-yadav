@@ -305,6 +305,8 @@ body.nav-open{overflow:hidden}
 .risk-card h3{font-size:1.05rem}
 .risk-card p{color:var(--ink-soft);font-size:.94rem;margin:0}
 
+.photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+
 .compare-wrap{position:relative;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:36px;border-radius:var(--radius);box-shadow:var(--shadow)}
 table.compare{width:100%;border-collapse:collapse;min-width:640px;background:#fff}
 table.compare th,table.compare td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:.94rem}
@@ -542,14 +544,19 @@ footer a:hover{color:#fff}
 .reveal{transform:translateY(22px) scale(.98);transition:transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.in{transform:none}
 
-/* ---------- Mobile swipeable carousels (risk cards, reviews) ---------- */
+/* ---------- Mobile swipeable carousel (reviews only) ---------- */
+/* risk-grid used to share this swipe-carousel treatment too, but on a phone
+   that meant each "why it matters" card was cropped to ~82% width with the
+   next one peeking in at the edge -- all 3 points are short, safety-relevant
+   facts a visitor should see without having to swipe, so below 820px it's a
+   plain full-width vertical stack instead (see .risk-grid rule above). */
 @media (max-width:720px){
-  .risk-grid,.review-grid{
+  .review-grid,.photo-grid{
     display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
     gap:16px;margin:8px -24px 0;padding:6px 24px 16px;scrollbar-width:none;
   }
-  .risk-grid::-webkit-scrollbar,.review-grid::-webkit-scrollbar{display:none}
-  .risk-grid>*,.review-grid>*{flex:0 0 82%;scroll-snap-align:center}
+  .review-grid::-webkit-scrollbar,.photo-grid::-webkit-scrollbar{display:none}
+  .review-grid>*,.photo-grid>*{flex:0 0 82%;scroll-snap-align:center}
 }
 
 /* ---------- Animated count-up numbers ---------- */
