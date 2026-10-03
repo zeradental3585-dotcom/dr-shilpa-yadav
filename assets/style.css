@@ -318,28 +318,66 @@ table.compare .col-implant{background:rgba(12,110,130,.06)}
 table.compare thead .col-implant{background:var(--teal-deep)}
 .compare-hint{display:none}
 
+/* Yes/No answer icons -- a small brand-colored check/cross dot in place of the
+   plain ✅/❌ emoji. Defined outside the media query so both the desktop table
+   and the mobile cards below get the same polished treatment. */
+.ans-value{display:inline-flex;align-items:center;gap:7px}
+.ans-dot{flex:0 0 16px;width:16px;height:16px;border-radius:50%;background-repeat:no-repeat;background-position:center;background-size:9px}
+.ans-yes .ans-dot{background-color:rgba(12,110,130,.14);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23064f5e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 13 10 18 19 7'/%3E%3C/svg%3E")}
+.ans-no .ans-dot{background-color:rgba(74,90,104,.12);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5a68' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3C/svg%3E")}
+
 /* Mobile: a 640px-wide table forced into a ~340px column meant seeing only
    one-and-a-bit columns at a time while swiping the whole table sideways --
    each criterion row is now its own swipeable card instead (data-label attrs
    on the <td>s supply the per-cell headings), one card at a time, same
    swipe-carousel pattern as the risk cards / reviews / photo gallery
-   elsewhere on this page. */
+   elsewhere on this page. Artistic pass (3 Oct 2026, per Satish): a serif
+   card title with a gold-line icon per criterion (nth-child-keyed, no HTML
+   needed), a warm gradient card background in place of flat white, and a
+   gold "best choice" star + accent border marking the Dental Implant column
+   in every card. */
 @media (max-width:680px){
   .compare-wrap{overflow-x:visible;box-shadow:none;border-radius:0;margin-top:26px}
   table.compare{display:block;min-width:0;width:100%}
   table.compare thead{display:none}
   table.compare tbody{
     display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-    gap:16px;margin:8px -24px 0;padding:6px 24px 16px;scrollbar-width:none;
+    gap:16px;margin:8px -24px 0;padding:10px 24px 20px;scrollbar-width:none;
   }
   table.compare tbody::-webkit-scrollbar{display:none}
-  table.compare tr{display:block;flex:0 0 82%;scroll-snap-align:center;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-  table.compare th:first-child{display:block;position:static;background:var(--navy);color:#fff;font-family:'Poppins',sans-serif;font-size:1rem;padding:13px 16px;text-align:left}
-  table.compare td{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);text-align:right;font-weight:500}
+  table.compare tr{
+    display:block;flex:0 0 82%;scroll-snap-align:center;overflow:hidden;
+    background:linear-gradient(180deg,#fff 0%,var(--paper-soft) 100%);
+    border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 34px -16px rgba(15,45,78,.22);
+  }
+  table.compare th:first-child{
+    display:flex;align-items:center;gap:11px;position:static;
+    background:linear-gradient(135deg,var(--navy),#143a63);color:#fff;
+    font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1rem;line-height:1.25;letter-spacing:-.01em;
+    padding:14px 16px;text-align:left;
+  }
+  table.compare th:first-child::before{
+    content:'';flex:0 0 30px;width:30px;height:30px;border-radius:50%;
+    background-color:rgba(232,202,140,.18);background-repeat:no-repeat;background-position:center;background-size:16px;
+  }
+  table.compare tbody tr:nth-child(1) th:first-child::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8ca8c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 L19 6 V11 C19 16 16 19.5 12 21 C8 19.5 5 16 5 11 V6 Z'/%3E%3Cpolyline points='9 12 11 14 15 9.5'/%3E%3C/svg%3E")}
+  table.compare tbody tr:nth-child(2) th:first-child::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8ca8c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='10' width='3.2' height='9' rx='1'/%3E%3Crect x='10.4' y='5' width='3.2' height='14' rx='1'/%3E%3Crect x='16.8' y='10' width='3.2' height='9' rx='1'/%3E%3C/svg%3E")}
+  table.compare tbody tr:nth-child(3) th:first-child::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8ca8c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='9' cy='10' r='.6' fill='%23e8ca8c' stroke='none'/%3E%3Ccircle cx='15' cy='10' r='.6' fill='%23e8ca8c' stroke='none'/%3E%3Cpath d='M8 14.5C9.2 16.1 10.6 16.9 12 16.9 13.4 16.9 14.8 16.1 16 14.5'/%3E%3C/svg%3E")}
+  table.compare tbody tr:nth-child(4) th:first-child::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8ca8c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7V12L15.2 14'/%3E%3C/svg%3E")}
+  table.compare tbody tr:nth-child(5) th:first-child::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8ca8c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 L17.5 11.2A5.5 5.5 0 1 1 6.5 11.2Z'/%3E%3C/svg%3E")}
+  table.compare td{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);text-align:right;font-weight:500}
   table.compare td:last-child{border-bottom:none}
   table.compare td::before{content:attr(data-label);flex:0 0 auto;font-size:.74rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft)}
-  table.compare td.col-implant::before{color:var(--teal-deep)}
-  .compare-hint{display:flex;text-align:center;font-size:.8rem;color:var(--ink-soft);margin-top:10px;gap:6px;align-items:center;justify-content:center}
+  table.compare td.col-implant{
+    background:linear-gradient(135deg,rgba(184,144,60,.12),rgba(12,110,130,.06));
+    border-left:3px solid var(--gold);padding-left:13px;
+  }
+  table.compare td.col-implant::before{content:attr(data-label) ' ★';color:var(--gold-deep)}
+  .compare-hint{
+    display:flex;width:fit-content;text-align:center;font-size:.8rem;font-weight:600;color:var(--navy);
+    margin:14px auto 0;gap:6px;align-items:center;justify-content:center;
+    background:var(--paper-warm);border:1px solid var(--gold-light);padding:7px 15px;border-radius:100px;
+  }
 }
 
 /* ---------- Authority ---------- */
