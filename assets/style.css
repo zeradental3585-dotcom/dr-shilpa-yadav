@@ -210,6 +210,17 @@ a{color:inherit;text-decoration:none}
      exact class of bug (hamburger pushed off-screen below ~370px) previously shipped
      on the Star Dental Hisar site and had to be fixed there. */
   .header-actions a[href^="tel:"]{display:none}
+  /* Real bug, confirmed via measurement: at a true 320px viewport (iPhone SE class),
+     "Smile Dental Clinic" needed 135px but the fluid brand-text box above only had
+     133px to work with once the badge/gaps/WhatsApp-icon/hamburger were accounted
+     for -- a 2px deficit, enough to trigger the ellipsis and clip to "Smile Dental
+     Cli...". Rather than shrink the brand font (would make it harder to read),
+     reclaimed ~20px of layout slack from spacing that has no visual cost this
+     narrow: tighter header-row side padding and smaller gaps between the badge/
+     wordmark and between the WhatsApp icon/hamburger. */
+  .header-row{padding-left:14px;padding-right:14px;gap:8px}
+  .brand{gap:6px}
+  .header-actions{gap:6px}
 }
 
 /* ---------- Navigation ---------- */
