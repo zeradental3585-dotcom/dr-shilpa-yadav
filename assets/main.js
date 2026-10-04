@@ -1,6 +1,6 @@
 // Smile Implant and Dental Clinic — Dr. Shilpa Yadav — shared site script
 (function(){
-  var WA_NUMBER = "918448668209";
+  var WA_NUMBER = "919873888037";
   var LEAD_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw3OEJlRvmYIhMfwRMtaU05jCGQO_vH-GRBhc3wbauSAsndBVde8gRfHOgRJN2J5uja/exec";
 
   function waLink(pageLabel){
