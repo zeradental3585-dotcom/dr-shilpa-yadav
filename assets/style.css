@@ -248,15 +248,18 @@ a{color:inherit;text-decoration:none}
 .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 @media (max-width:400px){.nav-toggle{width:38px;height:38px}}
 
-@media (max-width:1239px){
+@media (max-width:1319px){
   .site-nav{display:none}
   .nav-toggle{display:inline-flex}
 }
-@media (min-width:1240px){
+@media (min-width:1320px){
   /* The nav already signals a full, established practice -- drop the experience
-     badge here so the brand name never has to compete with it for room. The full
-     7-item nav only appears at 1240px+ (raised from 1101px) -- below that, a clean
-     hamburger beats a cramped, truncating header every time. */
+     badge here so the brand name never has to compete with it for room. The nav grew
+     from 7 to 8 items (Contact added, 5 Oct 2026) which ate the slack the previous
+     1240px breakpoint relied on and re-triggered brand-name ellipsis truncation at
+     1240-1304px -- measured via Playwright, not guessed. Raised to 1320px (full nav
+     now only appears at 1320px+, up from 1101px then 1240px) with a real margin this
+     time instead of a zero-slack fit, so the next nav item doesn't repeat this exact bug. */
   .exp-badge{display:none}
 }
 
